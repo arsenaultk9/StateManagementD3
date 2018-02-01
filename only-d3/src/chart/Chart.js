@@ -1,18 +1,19 @@
 import * as d3 from "d3";
+import data from "./bar-data.js";
 
 var margin = {top: 20, right: 20, bottom: 70, left: 40},
 width = 600 - margin.left - margin.right,
 height = 300 - margin.top - margin.bottom;
 
 // Parse the date / time
-var	parseDate = d3.timeFormat("%Y-%m").parse;
+function parseDate(date) { 
+  return d3.timeFormat(date, "%Y-%m")() }
 
 var x = d3.scaleBand().range([0, width]).round(.05);
 
 var y = d3.scaleLinear().range([height, 0]);
 
-var xAxis = d3.axisBottom(x)
-.tickFormat(d3.timeFormat("%Y-%m"));
+var xAxis = d3.axisBottom(x).tickFormat(parseDate);
 
 var yAxis = d3.axisLeft(y).ticks(10);
 
@@ -22,8 +23,6 @@ var svg = d3.select("body").append("svg")
 .append("g")
 .attr("transform", 
       "translate(" + margin.left + "," + margin.top + ")");
-
-d3.csv("bar-data.csv", function(error, data) {
 
 data.forEach(function(d) {
     d.date = parseDate(d.date);
@@ -58,8 +57,6 @@ svg.selectAll("bar")
 .enter().append("rect")
   .style("fill", "steelblue")
   .attr("x", function(d) { return x(d.date); })
-  .attr("width", x.rangeBand())
+  .attr("width", x.bandwidth())
   .attr("y", function(d) { return y(d.value); })
   .attr("height", function(d) { return height - y(d.value); });
-
-});

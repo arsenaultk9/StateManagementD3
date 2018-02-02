@@ -1,40 +1,38 @@
 import * as d3 from "d3";
+
+import ChartGlobal from "./ChartGlobal.js";
 import data from "./bar-data.js";
 
-var margin = {top: 20, right: 20, bottom: 70, left: 40},
-width = 600 - margin.left - margin.right,
-height = 300 - margin.top - margin.bottom;
+var chartGlobal = new ChartGlobal();
 
 // Parse the date / time
 function parseDate(date) { 
   return d3.timeFormat(date, "%Y-%m")() }
 
-var x = d3.scaleBand().range([0, width]).round(.05);
-
-var y = d3.scaleLinear().range([height, 0]);
-
-var xAxis = d3.axisBottom(x).tickFormat(parseDate);
-
-var yAxis = d3.axisLeft(y).ticks(10);
-
-var svg = d3.select("body").append("svg")
-.attr("width", width + margin.left + margin.right)
-.attr("height", height + margin.top + margin.bottom)
-.append("g")
-.attr("transform", 
-      "translate(" + margin.left + "," + margin.top + ")");
-
-data.forEach(function(d) {
+  data.forEach(function(d) {
     d.date = parseDate(d.date);
     d.value = +d.value;
 });
+
+var x = d3.scaleBand().range([0, chartGlobal.width]).round(.05);
+var y = d3.scaleLinear().range([chartGlobal.height, 0]);
+
+var xAxis = d3.axisBottom(x).tickFormat(parseDate);
+var yAxis = d3.axisLeft(y).ticks(10);
+
+var svg = d3.select("body").append("svg")
+.attr("width", chartGlobal.width + chartGlobal.margin.left + chartGlobal.margin.right)
+.attr("height", chartGlobal.height + chartGlobal.margin.top + chartGlobal.margin.bottom)
+.append("g")
+.attr("transform", 
+      "translate(" + chartGlobal.margin.left + "," + chartGlobal.margin.top + ")");
 
 x.domain(data.map(function(d) { return d.date; }));
 y.domain([0, d3.max(data, function(d) { return d.value; })]);
 
 svg.append("g")
   .attr("class", "x axis")
-  .attr("transform", "translate(0," + height + ")")
+  .attr("transform", "translate(0," + chartGlobal.height + ")")
   .call(xAxis)
 .selectAll("text")
   .style("text-anchor", "end")
@@ -59,4 +57,4 @@ svg.selectAll("bar")
   .attr("x", function(d) { return x(d.date); })
   .attr("width", x.bandwidth())
   .attr("y", function(d) { return y(d.value); })
-  .attr("height", function(d) { return height - y(d.value); });
+  .attr("height", function(d) { return chartGlobal.height - y(d.value); });

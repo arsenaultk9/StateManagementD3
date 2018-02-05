@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import './chart/Chart.js';
+import './chart/ChartBootstrapper.js';
 
 class App extends Component {
   render() {

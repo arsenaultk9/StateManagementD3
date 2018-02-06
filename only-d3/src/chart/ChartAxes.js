@@ -1,5 +1,4 @@
 import * as d3 from "d3";
-import {parseDate} from "../utilities/DateHelper.js";
 
 class ChartAxes {
     constructor(chartGlobal) {
@@ -8,7 +7,7 @@ class ChartAxes {
         this.x = d3.scaleBand().range([0, this.chartGlobal.width]).round(.05);
         this.y = d3.scaleLinear().range([this.chartGlobal.height, 0]);
         
-        this.xAxis = d3.axisBottom(this.x).tickFormat(parseDate);
+        this.xAxis = d3.axisBottom(this.x);//.tickFormat(parseDate);
         this.yAxis = d3.axisLeft(this.y).ticks(10);
     }
 

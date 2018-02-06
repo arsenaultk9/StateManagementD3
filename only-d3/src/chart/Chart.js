@@ -24,9 +24,9 @@ class Chart {
     svg.selectAll("bar")
       .data(this.data)
     .enter().append("rect")
-      .style("fill", "steelblue")
-      .attr("x", (d) => { return this.chartAxes.x(d.date); })
-      .attr("width", this.chartAxes.x.bandwidth())
+      .attr("class", "Chart-bar")
+      .attr("x", (d) => { return this.chartAxes.x(d.date) + 1; })
+      .attr("width", this.chartAxes.x.bandwidth() - 1)
       .attr("y", (d) => { return this.chartAxes.y(d.value); })
       .attr("height", (d) => { return this.chartGlobal.height - this.chartAxes.y(d.value); });
   }

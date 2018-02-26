@@ -1,0 +1,4 @@
+export default {
+    SCROLL_LEFT: "SCROLL_LEFT",
+    SCROLL_RIGHT: "SCROLL_RIGHT"
+}

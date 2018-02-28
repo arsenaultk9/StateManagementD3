@@ -4,8 +4,8 @@ import Topics from "../../../domain/Topics";
 import ScrollViewModel from "./ScrollViewModel";
 
 class ScrollController {
-    constructor() {
-        this.scrollViewModel = new ScrollViewModel(0, 50);
+    constructor(chartData) {
+        this.scrollViewModel = new ScrollViewModel(0, chartData.length);
     }
 
     scrollRight() {

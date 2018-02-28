@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import './chart/ChartBootstrapper.js';
-import ScrollComponent from './chart/controls/scroll/ScrollComponent.js';
+import ScrollComponent from "./chart/controls/scroll/ScrollComponent.js";
+import ChartBootstrapper from './chart/ChartBootstrapper.js';
+
+ChartBootstrapper.getInstance().drawChart();
 
 class App extends Component {
   render() {

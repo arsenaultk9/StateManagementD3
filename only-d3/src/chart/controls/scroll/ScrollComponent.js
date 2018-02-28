@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import { faChevronCircleLeft, faChevronCircleRight } from '@fortawesome/fontawesome-free-solid';
+import FontAwesomeIcon from "@fortawesome/react-fontawesome";
+import { faChevronCircleLeft, faChevronCircleRight } from "@fortawesome/fontawesome-free-solid";
 
-import ScrollController from "./ScrollController";
+import ChartBootstrapper from "../../ChartBootstrapper.js";
 
 class ScrollComponent extends Component {
     constructor() {
         super();
 
-        this.scrollController = new ScrollController();
+        this.scrollController = ChartBootstrapper.getInstance().scrollController;
     }
 
     render() {

@@ -1,19 +1,21 @@
 import amplify from "amplifier";
 
-import Topics from "../../../domain/Topics";
-import ScrollViewModel from "./ScrollViewModel";
+import Topics from "../../../domain/Topics.js";
+import ScrollViewModel from "./ScrollViewModel.js";
 
 class ScrollController {
-    constructor(chartData) {
-        this.scrollViewModel = new ScrollViewModel(0, chartData.length);
-    }
-
-    scrollRight() {
-        amplify.publish(Topics.SCROLL_RIGHT);
+    constructor(lowerBound, upperBound) {
+        this.scrollViewModel = new ScrollViewModel(lowerBound, upperBound);
     }
 
     scrollLeft() {
-        amplify.publish(Topics.SCROLL_LEFT);
+        this.scrollViewModel.scrollLeft();
+        amplify.publish(Topics.MOVE_VIEW_POSITION, this.scrollViewModel);
+    }
+
+    scrollRight() {
+        this.scrollViewModel.scrollRight();
+        amplify.publish(Topics.MOVE_VIEW_POSITION, this.scrollViewModel);
     }
 }
 

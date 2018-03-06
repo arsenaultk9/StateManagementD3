@@ -15,11 +15,11 @@ class ScrollComponent extends Component {
     render() {
         return (
             <div className="Scroll">
-                <div id="scrollLeft" onClick={(e) => this.scrollController.scrollLeft()} style={{ display: "inline" }}>
+                <div id="scrollLeft" onClick={(e) => this.scrollController.scrollLeft()} style={{ display: "inline" }} className={"Chart-button"}>
                     <FontAwesomeIcon icon={faChevronCircleLeft} size="2x" />
                 </div>
 
-                <div id="scrollRight" onClick={(e) => this.scrollController.scrollRight()} style={{ display: "inline" }}>
+                <div id="scrollRight" onClick={(e) => this.scrollController.scrollRight()} style={{ display: "inline" }} className={"Chart-button"}>
                     <FontAwesomeIcon icon={faChevronCircleRight} size="2x" />
                 </div>
             </div>

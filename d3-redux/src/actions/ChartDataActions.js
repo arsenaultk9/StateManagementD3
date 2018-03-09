@@ -10,7 +10,7 @@ function setChartData(chartData) {
 }
 
 function getChartData(dispatch) {
-    return function(dispatch) {
+    return function (dispatch) {
         const promise = new Promise(ChartDataServices.getChartData);
 
         promise.then((chartData) => {
@@ -19,4 +19,16 @@ function getChartData(dispatch) {
     }
 }
 
-export { getChartData }
+function moveLeft() {
+    return {
+        type: ActionTypes.MOVE_LEFT
+    }
+}
+
+function moveRight() {
+    return {
+        type: ActionTypes.MOVE_RIGHT
+    }
+}
+
+export { getChartData, moveLeft, moveRight }

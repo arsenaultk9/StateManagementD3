@@ -1,22 +1,17 @@
-import amplify from "amplifier";
 import * as d3 from "d3";
 
+import store from "../Store.js";
 import ChartGlobal from "./ChartGlobal.js";
 import ChartAxes from "./ChartAxes.js";
-import ActionTypes from "../domain/ActionTypes.js";
 
 class Chart {
-  constructor(data, lowerBound, upperBound) {
-    this.data = data;
-    this.lowerBound = lowerBound;
-    this.upperBound = upperBound;
-
+  constructor() {
     this.chartGlobal = new ChartGlobal();
 
     this.svg = this.createSvg();
     this.chartAxes = new ChartAxes(this.chartGlobal, this.svg);
 
-    amplify.subscribe(ActionTypes.MOVE_VIEW_POSITION, this.moveViewPosition.bind(this));
+    this.connectToStore();
   }
 
   createSvg() {
@@ -28,22 +23,21 @@ class Chart {
         "translate(" + this.chartGlobal.margin.left + "," + this.chartGlobal.margin.top + ")");
   }
 
-  moveViewPosition(scrollViewModel) {
-    this.lowerBound = scrollViewModel.lowerBound;
-    this.upperBound = scrollViewModel.upperBound;
-
-    this.draw();
+  connectToStore() {
+    store.subscribe(() => {
+      const shownData = store.getState().chartDataReducer.shownData;
+      this.draw(shownData);
+    });
   }
 
-  draw() {
-    const shownData = this.data.slice(this.lowerBound, this.upperBound);
+  draw(shownData) {
     this.chartAxes.draw(shownData);
 
     const barData = this.svg.selectAll("rect")
       .data(shownData, (d) => d.date);
 
     barData.exit().remove();
-      
+
     barData
       .enter()
       .append("rect")

@@ -2,7 +2,9 @@ import ActionTypes from "../domain/ActionTypes.js";
 
 const initialState = {
     chartData: [],
-    shownData: []
+    shownData: [],
+    lowerBound: 0,
+    upperBound: 0
 }
 
 const chartDataReducer = (state = initialState, action) => {
@@ -12,12 +14,34 @@ const chartDataReducer = (state = initialState, action) => {
             const upperBound = parseInt(action.chartData.length / 2, 10);
 
             const chartData = action.chartData;
-            const shownData = chartData.slice(lowerBound, upperBound);
 
             return Object.assign({}, state, {
                 chartData: chartData,
-                shownData: shownData
+                shownData: chartData.slice(lowerBound, upperBound),
+                lowerBound: lowerBound,
+                upperBound: upperBound
             });
+
+        case ActionTypes.MOVE_LEFT:
+            const leftLowerBound = state.lowerBound - 1;
+            const leftUpperBound = state.upperBound - 1;
+
+            return Object.assign({}, state, {
+                shownData: state.chartData.slice(leftLowerBound, leftUpperBound),
+                lowerBound: leftLowerBound,
+                upperBound: leftUpperBound
+            });
+
+        case ActionTypes.MOVE_RIGHT:
+            const rightLowerBound = state.lowerBound + 1;
+            const rightUpperBound = state.upperBound + 1;
+
+            return Object.assign({}, state, {
+                shownData: state.chartData.slice(rightLowerBound, rightUpperBound),
+                lowerBound: rightLowerBound,
+                upperBound: rightUpperBound
+            });
+
         default:
             return state;
     }

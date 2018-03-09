@@ -1,5 +1,4 @@
 import Chart from "./Chart.js";
-import ScrollController from "./controls/scroll/ScrollController.js";
 
 import store from "../Store.js";
 import * as ChartDataActions from "../actions/ChartDataActions.js";
@@ -8,7 +7,6 @@ let instance = null;
 
 class ChartBootstrapper {
     constructor() {
-        this.scrollController = new ScrollController();
         this.chart = new Chart();
     }
 

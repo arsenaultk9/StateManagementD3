@@ -3,7 +3,7 @@ import * as d3 from "d3";
 
 import ChartGlobal from "./ChartGlobal.js";
 import ChartAxes from "./ChartAxes.js";
-import Topics from "../domain/Topics.js";
+import ActionTypes from "../domain/ActionTypes.js";
 
 class Chart {
   constructor(data, lowerBound, upperBound) {
@@ -16,7 +16,7 @@ class Chart {
     this.svg = this.createSvg();
     this.chartAxes = new ChartAxes(this.chartGlobal, this.svg);
 
-    amplify.subscribe(Topics.MOVE_VIEW_POSITION, this.moveViewPosition.bind(this));
+    amplify.subscribe(ActionTypes.MOVE_VIEW_POSITION, this.moveViewPosition.bind(this));
   }
 
   createSvg() {

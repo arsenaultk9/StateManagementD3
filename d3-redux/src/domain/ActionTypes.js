@@ -1,3 +1,4 @@
 export default {
+    SET_CHART_DATA: "SET_CHART_DATA",
     MOVE_VIEW_POSITION: "MOVE_VIEW_POSITION"
 }

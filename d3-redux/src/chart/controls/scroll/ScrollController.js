@@ -1,6 +1,6 @@
 import amplify from "amplifier";
 
-import Topics from "../../../domain/Topics.js";
+import ActionTypes from "../../../domain/ActionTypes.js";
 import ScrollViewModel from "./ScrollViewModel.js";
 
 class ScrollController {
@@ -10,12 +10,12 @@ class ScrollController {
 
     scrollLeft() {
         this.scrollViewModel.scrollLeft();
-        amplify.publish(Topics.MOVE_VIEW_POSITION, this.scrollViewModel);
+        amplify.publish(ActionTypes.MOVE_VIEW_POSITION, this.scrollViewModel);
     }
 
     scrollRight() {
         this.scrollViewModel.scrollRight();
-        amplify.publish(Topics.MOVE_VIEW_POSITION, this.scrollViewModel);
+        amplify.publish(ActionTypes.MOVE_VIEW_POSITION, this.scrollViewModel);
     }
 }
 

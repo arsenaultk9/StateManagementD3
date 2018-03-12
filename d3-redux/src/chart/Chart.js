@@ -3,6 +3,7 @@ import * as d3 from "d3";
 import store from "../Store.js";
 import ChartGlobal from "./ChartGlobal.js";
 import ChartAxes from "./ChartAxes.js";
+import * as ChartDomainFactory from "./ChartDomainFactory.js";
 
 class Chart {
   constructor() {
@@ -31,7 +32,7 @@ class Chart {
   }
 
   draw(shownData) {
-    this.chartAxes.draw(shownData);
+    const chartDomain = ChartDomainFactory.getChartDomain(shownData);
 
     const barData = this.svg.selectAll("rect")
       .data(shownData, (d) => d.date);
@@ -43,10 +44,10 @@ class Chart {
       .append("rect")
       .attr("class", "Chart-bar")
       .merge(barData)
-      .attr("x", (d) => { return this.chartAxes.x(d.date) + 1; })
-      .attr("width", this.chartAxes.x.bandwidth() - 1)
-      .attr("y", (d) => { return this.chartAxes.y(d.value); })
-      .attr("height", (d) => { return this.chartGlobal.height - this.chartAxes.y(d.value); });
+      .attr("x", (d) => { return chartDomain.x(d.date) + 1; })
+      .attr("width", chartDomain.x.bandwidth() - 1)
+      .attr("y", (d) => { return chartDomain.y(d.value); })
+      .attr("height", (d) => { return this.chartGlobal.height - chartDomain.y(d.value); });
   }
 }
 

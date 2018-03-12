@@ -1,14 +1,10 @@
 import * as d3 from "d3";
+import store from "../Store.js";
+import * as ChartDomainFactory from "./ChartDomainFactory.js";
 
 class ChartAxes {
   constructor(chartGlobal, svg) {
     this.chartGlobal = chartGlobal;
-
-    this.x = d3.scaleBand().range([0, this.chartGlobal.width]).round(.05);
-    this.y = d3.scaleLinear().range([this.chartGlobal.height, 0]);
-
-    this.xAxis = d3.axisBottom(this.x);
-    this.yAxis = d3.axisLeft(this.y).ticks(10);
 
     this.svgXAxis = svg.append("g")
       .attr("class", "x axis")
@@ -16,23 +12,34 @@ class ChartAxes {
 
     this.svgYAxis = svg.append("g")
       .attr("class", "y axis");
+
+    this.connectToStore();
+  }
+
+  connectToStore() {
+    store.subscribe(() => {
+      const shownData = store.getState().chartDataReducer.shownData;
+      this.draw(shownData);
+    });
   }
 
   draw(data) {
-    this.x.domain(data.map(function (d) { return d.date; }));
-    this.y.domain([0, d3.max(data, function (d) { return d.value; })]);
+    const chartDomain = ChartDomainFactory.getChartDomain(data);
 
-    this.xAxis = d3.axisBottom(this.x);
-    this.yAxis = d3.axisLeft(this.y).ticks(10);
+    chartDomain.x.domain(data.map(function (d) { return d.date; }));
+    chartDomain.y.domain([0, d3.max(data, function (d) { return d.value; })]);
 
-    this.svgXAxis.call(this.xAxis)
+    const xAxis = d3.axisBottom(chartDomain.x);
+    const yAxis = d3.axisLeft(chartDomain.y).ticks(10);
+
+    this.svgXAxis.call(xAxis)
       .selectAll("text")
       .style("text-anchor", "end")
       .attr("dx", "-.8em")
       .attr("dy", "-.55em")
       .attr("transform", "rotate(-90)");
 
-    this.svgYAxis.call(this.yAxis)
+    this.svgYAxis.call(yAxis)
       .append("text")
       .attr("transform", "rotate(-90)")
       .attr("y", 6)

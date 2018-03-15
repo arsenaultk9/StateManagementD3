@@ -3,7 +3,6 @@ import * as d3 from "d3";
 import store from "../Store.js";
 import ChartGlobal from "./ChartGlobal.js";
 import ChartAxes from "./ChartAxes.js";
-import * as ChartDomainFactory from "./ChartDomainFactory.js";
 
 class Chart {
   constructor() {
@@ -26,14 +25,12 @@ class Chart {
 
   connectToStore() {
     store.subscribe(() => {
-      const shownData = store.getState().chartDataReducer.shownData;
-      this.draw(shownData);
+      const chartDataReducer = store.getState().chartDataReducer;
+      this.draw(chartDataReducer.shownData, chartDataReducer.x, chartDataReducer.y);
     });
   }
 
-  draw(shownData) {
-    const chartDomain = ChartDomainFactory.getChartDomain(shownData);
-
+  draw(shownData, x, y) {
     const barData = this.svg.selectAll("rect")
       .data(shownData, (d) => d.date);
 
@@ -44,10 +41,10 @@ class Chart {
       .append("rect")
       .attr("class", "Chart-bar")
       .merge(barData)
-      .attr("x", (d) => { return chartDomain.x(d.date) + 1; })
-      .attr("width", chartDomain.x.bandwidth() - 1)
-      .attr("y", (d) => { return chartDomain.y(d.value); })
-      .attr("height", (d) => { return this.chartGlobal.height - chartDomain.y(d.value); });
+      .attr("x", (d) => { return x(d.date) + 1; })
+      .attr("width", x.bandwidth() - 1)
+      .attr("y", (d) => { return y(d.value); })
+      .attr("height", (d) => { return this.chartGlobal.height - y(d.value); });
   }
 }
 

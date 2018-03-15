@@ -1,6 +1,5 @@
 import * as d3 from "d3";
 import store from "../Store.js";
-import * as ChartDomainFactory from "./ChartDomainFactory.js";
 
 class ChartAxes {
   constructor(chartGlobal, svg) {
@@ -18,19 +17,17 @@ class ChartAxes {
 
   connectToStore() {
     store.subscribe(() => {
-      const shownData = store.getState().chartDataReducer.shownData;
-      this.draw(shownData);
+      const chartDataReducer = store.getState().chartDataReducer;
+      this.draw(chartDataReducer.shownData, chartDataReducer.x, chartDataReducer.y);
     });
   }
 
-  draw(data) {
-    const chartDomain = ChartDomainFactory.getChartDomain(data);
+  draw(data, x, y) {
+    x.domain(data.map(function (d) { return d.date; }));
+    y.domain([0, d3.max(data, function (d) { return d.value; })]);
 
-    chartDomain.x.domain(data.map(function (d) { return d.date; }));
-    chartDomain.y.domain([0, d3.max(data, function (d) { return d.value; })]);
-
-    const xAxis = d3.axisBottom(chartDomain.x);
-    const yAxis = d3.axisLeft(chartDomain.y).ticks(10);
+    const xAxis = d3.axisBottom(x);
+    const yAxis = d3.axisLeft(y).ticks(10);
 
     this.svgXAxis.call(xAxis)
       .selectAll("text")

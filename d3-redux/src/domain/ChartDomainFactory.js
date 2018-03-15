@@ -1,5 +1,5 @@
 import * as d3 from "d3";
-import ChartGlobal from "./ChartGlobal.js";
+import ChartGlobal from "../chart/ChartGlobal.js";
 
 const chartGlobal = new ChartGlobal();
 

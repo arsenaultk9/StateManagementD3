@@ -5,7 +5,8 @@ import './App.css';
 import ScrollComponent from "./chart/controls/scroll/ScrollComponent.js";
 import ChartBootstrapper from './chart/ChartBootstrapper.js';
 
-ChartBootstrapper.getInstance().drawChart();
+const chartBootstrapper = new ChartBootstrapper();
+chartBootstrapper.drawChart();
 
 class App extends Component {
   render() {

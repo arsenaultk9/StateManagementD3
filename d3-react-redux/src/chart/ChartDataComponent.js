@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import { connect } from "react-redux";
 
 class ChartDataComponent extends Component {
     render() {
@@ -10,4 +11,13 @@ class ChartDataComponent extends Component {
     }
 }
 
-export default ChartDataComponent;
+const mapStateToProps = storeState => {
+    return {
+        shownData: storeState.chartDataReducer.shownData,
+        x: storeState.chartDataReducer.x,
+        y: storeState.chartDataReducer.y,
+    }
+}
+
+const ChartDataContainer = connect(mapStateToProps)(ChartDataComponent);
+export default ChartDataContainer;

@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 
 import ScrollComponent from "./chart/controls/scroll/ScrollComponent.js";
+import ChartComponent from "./chart/ChartComponent.js";
 import ChartBootstrapper from './chart/ChartBootstrapper.js';
 
 const chartBootstrapper = new ChartBootstrapper();
@@ -18,6 +19,7 @@ class App extends Component {
         </header>
 
         <ScrollComponent />
+        <ChartComponent />
       </div>
     );
   }

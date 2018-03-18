@@ -36,3 +36,14 @@
 .Chart-button svg:hover {
   color:steelblue;
 }
+
+.Chart-line {
+  stroke: black;
+  stroke-width: 1px;
+  shape-rendering:crispEdges;
+}
+
+.Chart-text {
+  fill: black;
+  text-anchor: end;
+}

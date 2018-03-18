@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import ChartAxesComponent from "./ChartAxesComponent.js";
+import ChartAxesComponent from "./axes/ChartAxesComponent.js";
 import ChartDataComponent from "./ChartDataComponent.js";
 
 class ChartComponent extends Component {

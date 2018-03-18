@@ -1,11 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { connect } from "react-redux";
+
+import BottomChartComponent from "./BottomChartComponent.js";
 
 class ChartAxesComponent extends Component {
     render() {
         return (
-            <g>
-
+            <g transform={"translate(0," + this.props.chartSettings.height + ")"}>
+                <BottomChartComponent shownData={this.props.shownData} x={this.props.x} chartSettings={this.props.chartSettings} />
             </g>
         )
     }
@@ -16,6 +18,7 @@ const mapStateToProps = storeState => {
         shownData: storeState.chartDataReducer.shownData,
         x: storeState.chartDataReducer.x,
         y: storeState.chartDataReducer.y,
+        chartSettings: storeState.chartSettingsReducer
     }
 }
 

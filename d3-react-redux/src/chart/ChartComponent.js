@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
 
-import ChartGlobal from "./ChartGlobal.js";
 import ChartAxesComponent from "./ChartAxesComponent.js";
 import ChartDataComponent from "./ChartDataComponent.js";
 
 class ChartComponent extends Component {
-    constructor() {
-        super();
-        this.chartGlobal = new ChartGlobal();
+    constructor(props) {
+        super(props);
 
-        this.chartWidth = this.chartGlobal.width + this.chartGlobal.margin.left + this.chartGlobal.margin.right;
-        this.chartHeight = this.chartGlobal.height + this.chartGlobal.margin.top + this.chartGlobal.margin.bottom;
+        this.chartSettings = this.props.chartSettings;
+        this.chartWidth = this.chartSettings.width + this.chartSettings.margin.left + this.chartSettings.margin.right;
+        this.chartHeight = this.chartSettings.height + this.chartSettings.margin.top + this.chartSettings.margin.bottom;
     }
 
     render() {
         return (
             <svg width={this.chartWidth} height={this.chartHeight} >
-                <g transform={"translate(" + this.chartGlobal.margin.left + "," + this.chartGlobal.margin.top + ")"}>
+                <g transform={"translate(" + this.chartSettings.margin.left + "," + this.chartSettings.margin.top + ")"}>
                     <ChartAxesComponent />
                     <ChartDataComponent />
                 </g>
@@ -25,4 +25,11 @@ class ChartComponent extends Component {
     }
 }
 
-export default ChartComponent;
+const mapStateToProps = storeState => {
+    return {
+        chartSettings: storeState.chartSettingsReducer
+    }
+}
+
+const ChartContainer = connect(mapStateToProps)(ChartComponent);
+export default ChartContainer;

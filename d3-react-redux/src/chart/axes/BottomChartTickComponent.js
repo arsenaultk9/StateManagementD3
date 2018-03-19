@@ -3,9 +3,10 @@ import React, { Component } from "react";
 class BottomChartTickComponent extends Component {
     render() {
         const xPos = this.props.x(this.props.data.date);
+        const textXPos = xPos + 4;
 
         return (
-            <g>
+            <g id={"bottomChartTick" + this.props.data.date }>
                 <line
                     className="Chart-line"
                     x1={xPos}
@@ -13,14 +14,16 @@ class BottomChartTickComponent extends Component {
                     y1={0}
                     y2={5} />
 
-                {/* <text 
+                <text
                     className="Chart-text"
-                    x = {xPos}
-                    y = {5}
-                    transform={"rotate(-90)"}>
+                    x={textXPos}
+                    y={5}
+                    transform={"rotate(-90, " + textXPos + ", 0)"}
                     dx={"-.8em"}
-                    {this.props.data.value}
-                </text> */}
+                    dy={"-.55em"}
+                >
+                    {this.props.data.date}
+                </text>
             </g>
         )
     }

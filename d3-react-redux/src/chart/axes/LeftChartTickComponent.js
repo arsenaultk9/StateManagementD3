@@ -1,31 +1,32 @@
 import React, { Component } from "react";
 
-class BottomChartTickComponent extends Component {
+class LeftChartTickComponent extends Component {
     render() {
-        const xPos = this.props.x(this.props.data.date);
-        const textXPos = xPos + 4;
+        const yPos = -this.props.y(this.props.data.value);
+        const textXPos = yPos + 4;
 
         return (
-            <g id={"bottomChartTick" + this.props.data.date }>
+            <g id={"leftChartTick" + this.props.data.value }>
                 <line
                     className="Chart-line"
-                    x1={xPos}
-                    x2={xPos}
-                    y1={0}
-                    y2={5} />
+                    x1={-5}
+                    x2={0}
+                    y1={yPos}
+                    y2={yPos} />
 
-                <text
+                {/* <text
                     className="Chart-text"
                     x={textXPos}
                     y={5}
                     transform={"rotate(-90, " + textXPos + ", 0)"}
                     dx={"-.8em"}
                     dy={"-.55em"}>
+
                     {this.props.data.date}
-                </text>
+                </text> */}
             </g>
         )
     }
 }
 
-export default BottomChartTickComponent;
+export default LeftChartTickComponent;

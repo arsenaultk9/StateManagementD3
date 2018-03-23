@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class BottomChartTickComponent extends Component {
     render() {
-        const xPos = this.props.x(this.props.data.date);
+        const xPos = this.props.x(this.props.data.date) + (this.props.x.bandwidth() / 2);
         const textXPos = xPos + 4;
 
         return (

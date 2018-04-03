@@ -15,7 +15,7 @@ class ChartComponent extends Component {
 
     render() {
         return (
-            <svg width={this.chartWidth} height={this.chartHeight} >
+            <svg width={this.chartWidth} height={this.chartHeight} shape-rendering="crispEdges">
                 <g transform={"translate(" + this.chartSettings.margin.left + "," + this.chartSettings.margin.top + ")"}>
                     <ChartAxesComponent />
                     <ChartDataComponent />

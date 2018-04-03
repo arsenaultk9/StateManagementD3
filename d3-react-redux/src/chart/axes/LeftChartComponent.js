@@ -27,7 +27,7 @@ class LeftChartComponent extends Component {
 
     render() {
         const bottomTicks = this.ticks.map(tick => (
-            <LeftChartTickComponent tick={tick} highestTick={this.highestTick} y={this.props.y} />
+            <LeftChartTickComponent tick={tick} height={this.props.chartSettings.height} y={this.props.y} />
         ));
 
         return (

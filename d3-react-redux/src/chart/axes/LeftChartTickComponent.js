@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class LeftChartTickComponent extends Component {
     render() {
-        const yPos = -this.props.y(this.props.tick) - 3;
+        const yPos = parseInt(-this.props.height  + this.props.y(this.props.tick), 10);
         const textYPos = yPos + 9;
 
         return (
@@ -21,7 +21,7 @@ class LeftChartTickComponent extends Component {
                     dx={"-.8em"}
                     dy={"-.55em"}>
 
-                    {parseInt(this.props.highestTick, 10) - parseInt(this.props.tick, 10) }
+                    {this.props.tick}
                 </text>
             </g>
         )

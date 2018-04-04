@@ -29,7 +29,7 @@ const mapStateToProps = storeState => {
 const mapDispatchToProps = dispatch => {
     return {
         scrollLeft: () => dispatch(ChartDataActions.moveLeft()),
-        scrollRight: () => dispatch(ChartDataActions.moveLeft())
+        scrollRight: () => dispatch(ChartDataActions.moveRight())
     }
 }
 

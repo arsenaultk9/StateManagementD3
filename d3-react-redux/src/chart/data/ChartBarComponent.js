@@ -5,16 +5,19 @@ class ChartBarComponent extends Component {
         const xPos = this.props.x(this.props.data.date);
         const width = this.props.x.bandwidth();
 
-        const height = this.props.y(this.props.data.value);
+        const height = this.props.chartSettings.height - this.props.y(this.props.data.value);
         const yPos = -height;
 
         return (
-            <rect
-                className="Chart-bar"
-                x={xPos}
-                y={yPos}
-                width={width}
-                height={height}/>
+            <g>
+                <rect
+                    className="Chart-bar"
+                    x={xPos}
+                    y={yPos}
+                    width={width}
+                    height={height} />
+
+            </g>
         )
     }
 }

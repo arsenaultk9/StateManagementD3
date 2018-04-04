@@ -24,7 +24,7 @@ class LeftChartTickComponent extends Component {
     render() {
         const yPos = parseInt(-this.props.height + this.props.y(this.props.tick.value), 10);
         return (
-            <g id={"leftChartTick" + this.props.tick}>
+            <g>
                 <line
                     className="Chart-line"
                     x1={-5}

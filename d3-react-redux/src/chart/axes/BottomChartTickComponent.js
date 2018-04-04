@@ -6,7 +6,7 @@ class BottomChartTickComponent extends Component {
         const textXPos = xPos + 4;
 
         return (
-            <g id={"bottomChartTick" + this.props.data.date }>
+            <g>
                 <line
                     className="Chart-line"
                     x1={xPos}

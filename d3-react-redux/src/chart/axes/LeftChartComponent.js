@@ -33,7 +33,7 @@ class LeftChartComponent extends Component {
 
     render() {
         const bottomTicks = this.ticks.map(tick => (
-            <LeftChartTickComponent tick={tick} height={this.props.chartSettings.height} y={this.props.y} />
+            <LeftChartTickComponent key={"leftChartTick" + tick.value} tick={tick} height={this.props.chartSettings.height} y={this.props.y} />
         ));
 
         return (

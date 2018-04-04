@@ -6,11 +6,11 @@ import ChartBarComponent from "./ChartBarComponent.js";
 class ChartDataComponent extends Component {
     render() {
         const chartBars = this.props.shownData.map((data) => (
-            <ChartBarComponent data={data} x={this.props.x} y={this.props.y} chartSettings={this.props.chartSettings} />
+            <ChartBarComponent key={"bar" + data.date} data={data} x={this.props.x} y={this.props.y} chartSettings={this.props.chartSettings} />
         ));
 
         return (
-            <g>
+            <g transform={"translate(0," + this.props.chartSettings.height + ")"}>
                 {chartBars}
             </g>
         )

@@ -5,21 +5,27 @@ class LeftChartComponent extends Component {
     constructor(props) {
         super(props);
 
-        this.highestTick = this.getHighestTick(this.props.shownData)
-        this.ticks = this.getTicks(this.highestTick);
+        this.highestValue = this.getHighestValue(this.props.shownData);
+        this.highestTick = this.getHighestTick(this.highestValue);
+        this.ticks = this.getTicks(this.highestTick, this.highestValue);
     }
 
-    getHighestTick(shownData) {
+    getHighestValue(shownData) {
         const shownValues = shownData.map(sd => sd.value);
-        const highestShownData = Math.max.apply(Math, shownValues);
-
-        return Math.ceil(highestShownData / 100) * 100;
+        return Math.max.apply(Math, shownValues);
     }
 
-    getTicks(highestTick) {
+    getHighestTick(highestValue) {
+        return Math.ceil(highestValue / 100) * 100;
+    }
+
+    getTicks(highestTick, highestValue) {
         const ticks = [];
+
         for (let currentTick = 0; currentTick <= highestTick; currentTick += 100) {
-            ticks.push(currentTick);
+            const isBorderTick = currentTick === highestTick;
+            const valueAjusted = isBorderTick ? highestValue : currentTick;
+            ticks.push({ value: valueAjusted, isBorderTick: isBorderTick });
         }
 
         return ticks;

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import ChartAxesComponent from "./axes/ChartAxesComponent.js";
-import ChartDataComponent from "./ChartDataComponent.js";
+import ChartDataComponent from "./data/ChartDataComponent.js";
 
 class ChartComponent extends Component {
     constructor(props) {

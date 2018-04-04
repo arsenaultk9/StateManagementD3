@@ -1,12 +1,30 @@
 import React, { Component } from "react";
 
 class LeftChartTickComponent extends Component {
-    render() {
-        const yPos = parseInt(-this.props.height  + this.props.y(this.props.tick), 10);
-        const textYPos = yPos + 9;
+    getText(yPos, text) {
+        if (this.props.tick.isBorderTick) {
+            return null;
+        }
 
+        const textYPos = yPos + 9;
+        
         return (
-            <g id={"leftChartTick" + this.props.tick }>
+            <text
+                className="Chart-text"
+                x={-5}
+                y={textYPos}
+                dx={"-.8em"}
+                dy={"-.55em"}>
+
+                {text}
+            </text>
+        )
+    }
+
+    render() {
+        const yPos = parseInt(-this.props.height + this.props.y(this.props.tick.value), 10);
+        return (
+            <g id={"leftChartTick" + this.props.tick}>
                 <line
                     className="Chart-line"
                     x1={-5}
@@ -14,15 +32,7 @@ class LeftChartTickComponent extends Component {
                     y1={yPos}
                     y2={yPos} />
 
-                <text
-                    className="Chart-text"
-                    x={-5}
-                    y={textYPos}
-                    dx={"-.8em"}
-                    dy={"-.55em"}>
-
-                    {this.props.tick}
-                </text>
+                {this.getText(yPos, this.props.tick.value)}
             </g>
         )
     }

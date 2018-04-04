@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware, combineReducers } from "redux";
+import { createStore, applyMiddleware, combineReducers, compose  } from "redux";
 import Thunk from "redux-thunk";
 import Logger from "redux-logger";
 
@@ -8,5 +8,6 @@ const chartAppReducers = combineReducers({
     chartDataReducer: ChartDataReducer
 });
 
-let store = createStore(chartAppReducers, applyMiddleware(Thunk, Logger));
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+let store = createStore(chartAppReducers, composeEnhancers(applyMiddleware(Thunk, Logger)));
 export default store;

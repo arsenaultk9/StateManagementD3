@@ -18,6 +18,7 @@ class Chart {
     return d3.select("body").append("svg")
       .attr("width", this.chartGlobal.width + this.chartGlobal.margin.left + this.chartGlobal.margin.right)
       .attr("height", this.chartGlobal.height + this.chartGlobal.margin.top + this.chartGlobal.margin.bottom)
+      .attr("class", "Chart")
       .append("g")
       .attr("transform",
         "translate(" + this.chartGlobal.margin.left + "," + this.chartGlobal.margin.top + ")");

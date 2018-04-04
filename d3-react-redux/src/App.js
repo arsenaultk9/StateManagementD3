@@ -4,10 +4,10 @@ import './App.css';
 
 import ScrollComponent from "./chart/controls/scroll/ScrollComponent.js";
 import ChartComponent from "./chart/ChartComponent.js";
-import ChartBootstrapper from './chart/ChartBootstrapper.js';
 
-const chartBootstrapper = new ChartBootstrapper();
-chartBootstrapper.drawChart();
+import * as ChartDataActions from "./actions/ChartDataActions.js";
+import store from "./Store.js";
+store.dispatch(ChartDataActions.getChartData());
 
 class App extends Component {
   render() {

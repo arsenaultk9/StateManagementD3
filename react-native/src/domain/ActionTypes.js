@@ -1,0 +1,5 @@
+export default {
+    SET_CHART_DATA: "SET_CHART_DATA",
+    MOVE_LEFT: "MOVE_LEFT",
+    MOVE_RIGHT: "MOVE_RIGHT",
+}
